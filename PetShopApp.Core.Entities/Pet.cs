@@ -24,6 +24,12 @@ namespace PetShopApp.Core.Entities
             this.PreviousOwner = PreviousOwner;
             this.Price = Price;
         }
+
+        public Pet()
+        {
+
+        }
+
         public override string ToString()
         {
             return ($"{ID} - {Name} - {Type} - {Birthdate} - {SoldDate} - {Colour} - {PreviousOwner} - {Price}");
