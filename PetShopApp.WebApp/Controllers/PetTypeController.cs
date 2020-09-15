@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using PetShopApp.Core.AppService;
+using PetShopApp.Core.Entities;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,36 +14,92 @@ namespace PetShopApp.WebApp.Controllers
     [ApiController]
     public class PetTypeController : ControllerBase
     {
+
+        private ITypeService _typeService;
+        public PetTypeController(ITypeService typeService)
+        {
+            _typeService = typeService;
+        }
+
         // GET: api/<PetTypeController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ActionResult<IEnumerable<PetType>> Get()
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                return _typeService.GetTypes();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e);
+            }
         }
 
         // GET api/<PetTypeController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public ActionResult<PetType> Get(int id)
         {
-            return "value";
+            try
+            {
+                return _typeService.GetTypes().Find(x => x.Id == id);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e);
+            }
         }
 
         // POST api/<PetTypeController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult<PetType> Post([FromBody] PetType value)
         {
+            try
+            {
+                if (string.IsNullOrEmpty(value.name))
+                {
+                    return BadRequest("Name is required to create a new type!");
+                }
+                return StatusCode(201, _typeService.CreateType(value));
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e);
+            }
         }
 
         // PUT api/<PetTypeController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult<PetType> Put(int id, [FromBody] PetType value)
         {
+            try
+            {
+                if (string.IsNullOrEmpty(value.name))
+                {
+                    return BadRequest("Name is required to edit an type!");
+                }
+                else
+                {
+                    return StatusCode(202, _typeService.EditType(id, value));
+                }
+            }
+            catch (Exception e)
+            {
+                return StatusCode(404, e);
+            }
         }
 
         // DELETE api/<PetTypeController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult<Owner> Delete(int id)
         {
+            try
+            {
+                return StatusCode(202, _typeService.Delete(id));
+            }
+            catch (Exception e)
+            {
+                return StatusCode(404, e);
+            }
         }
     }
 }

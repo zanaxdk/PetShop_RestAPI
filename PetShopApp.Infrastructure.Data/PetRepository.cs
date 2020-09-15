@@ -2,6 +2,7 @@
 using PetShopApp.Core.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace PetShopApp.Infrastructure.Data
@@ -42,6 +43,25 @@ namespace PetShopApp.Infrastructure.Data
         public List<Pet> ReadPets()
         {
             return FakeDB.PetList;
+        }
+
+        public List<Pet> ReadPets(Filter filter)
+        {
+            IEnumerable<Pet> filtering = FakeDB.PetList;
+            if (!string.IsNullOrEmpty(filter.SearchText))
+            {
+                switch (filter.SearchField.ToLower())
+                {
+                    case "name":
+                        filtering = filtering.Where(c => c.Name.Contains(filter.SearchText));
+                        break;
+                    case "color":
+                        filtering = filtering.Where(c => c.Colour.Contains(filter.SearchText));
+                        break;
+
+                }
+            }
+            return filtering.ToList();
         }
     }
 }

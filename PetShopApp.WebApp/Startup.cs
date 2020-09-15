@@ -32,9 +32,13 @@ namespace PetShopApp.WebApp
         {
             services.AddScoped<IPetRepository, PetRepository>();
             services.AddScoped<IPetService, PetService>();
+            services.AddScoped<ITypeRepository, TypeRepository>();
+            services.AddScoped<ITypeService, TypeService>();
+            services.AddScoped<IOwnerService, OwnerService>();
+            services.AddScoped<IOwnerRepository, OwnerRepository>();
             services.AddControllers().AddNewtonsoftJson(o => {
                 o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-                o.SerializerSettings.MaxDepth = 0;
+                o.SerializerSettings.MaxDepth = 5;
             });
         }
 
