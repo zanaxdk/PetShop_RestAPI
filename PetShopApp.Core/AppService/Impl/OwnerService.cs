@@ -38,7 +38,7 @@ namespace PetShopApp.Core.AppService.Impl
         {
             if (!string.IsNullOrEmpty(filter.SearchText) && string.IsNullOrEmpty(filter.SearchField))
             {
-                filter.SearchField = "First name";
+                filter.SearchField = "FName";
             }
 
             return _OwnerRepository.ReadOwners(filter);

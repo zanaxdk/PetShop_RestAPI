@@ -38,7 +38,7 @@ namespace PetShopApp.Core.AppService.Impl
         {
             if (!string.IsNullOrEmpty(filter.SearchText) && string.IsNullOrEmpty(filter.SearchField))
             {
-                filter.SearchField = "Type name";
+                filter.SearchField = "name";
             }
 
             return _TypeRepository.ReadTypes(filter);
