@@ -12,6 +12,6 @@ namespace PetShopApp.Core.AppService
         bool Delete(int iD);
         public PetType CreateType(PetType type);
         public PetType EditType(int ID, PetType type);
-        public List<Pet> GetTypes(Filter filter);
+        public List<PetType> GetTypes(Filter filter);
     }
 }
