@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PetShopApp.Core.AppService;
 using PetShopApp.Core.Entities;
+using PetShopApp.Infrastructure.Data;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -23,11 +24,11 @@ namespace PetShopApp.WebApp.Controllers
 
         // GET: api/<PetTypeController>
         [HttpGet]
-        public ActionResult<IEnumerable<PetType>> Get()
+        public ActionResult<IEnumerable<PetType>> Get([FromQuery] Filter filter)
         {
             try
             {
-                return _typeService.GetTypes();
+                return _typeService.GetTypes(filter);
             }
             catch (Exception e)
             {

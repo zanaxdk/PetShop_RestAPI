@@ -52,10 +52,10 @@ namespace PetShopApp.Infrastructure.Data
             {
                 switch (filter.SearchField.ToLower())
                 {
-                    case "FName":
+                    case "fname":
                         filtering = filtering.Where(c => c.FName.Contains(filter.SearchText));
                         break;
-                    case "LName":
+                    case "lname":
                         filtering = filtering.Where(c => c.LName.Contains(filter.SearchText));
                         break;
 

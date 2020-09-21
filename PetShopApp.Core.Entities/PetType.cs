@@ -11,5 +11,7 @@ namespace PetShopApp.Core.Entities
         public List<Pet> pets { get; set; }
 
         public PetType(int ID) { }
+
+        public PetType() { }
     }
 }

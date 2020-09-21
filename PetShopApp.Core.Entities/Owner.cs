@@ -28,6 +28,7 @@ namespace PetShopApp.Core.Entities
         }
 
         public Owner(int ID) { }
+        public Owner() { }
         public override string ToString()
         {
             return ($"{ID} - {FName} - {LName} - {PhoneNumber} - {Email} - {Address} - {Birthdate} - {OwnedPets}");

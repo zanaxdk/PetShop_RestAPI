@@ -44,7 +44,7 @@ namespace PetShopApp.Infrastructure.Data
         {
 
             pettype.Id = iD;
-            ID++;
+            iD++;
             TypeList.Add(pettype);
             return pettype;
         }

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using PetShopApp.Core.AppService;
 using PetShopApp.Core.AppService.Impl;
 using PetShopApp.Core.Entities;
+using PetShopApp.Infrastructure.Data;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -25,11 +26,11 @@ namespace PetShopApp.WebApp.Controllers
 
         // GET: api/<OwnerController>
         [HttpGet]
-        public ActionResult<IEnumerable<Owner>> Get()
+        public ActionResult<IEnumerable<Owner>> Get([FromQuery] Filter filter)
         {
             try
             {
-                return _ownerService.GetOwners();
+                return _ownerService.GetOwners(filter);
             }
             catch (Exception e)
             { 
